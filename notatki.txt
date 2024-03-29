@@ -1,0 +1,5 @@
+o znaku:
+- ma id, plik graficzny (link), kod qr, opis, 
+
+user:
+login, haslo, mail, osiagniecia zdobyte, zobaczone znaki

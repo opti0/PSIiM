@@ -13,9 +13,6 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-# Dummy user database
-users = {'user1': 'password1', 'user2': 'password2'}
-
 @app.route('/')
 def index():
     return render_template('index.html', current_user=session.get('current_user'))
@@ -53,7 +50,6 @@ def login():
             print("Zalogowano")
             session['user_id'] = user.UserID
             session['current_user'] = user.Name
-            #return render_template('index.html', testData=testData)
             return redirect(url_for('index'))
         else:
             error_message = "Nieprawidłowa nazwa użytkownika lub hasło. Spróbuj ponownie!"

@@ -25,13 +25,18 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        email = request.form['email']
         # Sprawdzamy, czy użytkownik już istnieje w bazie danych
         existing_user = User.query.filter_by(Name=username).first()
         if existing_user:
             error_message = "Użytkownik o tej nazwie już istnieje. Proszę wybrać inną nazwę."
             return render_template('register.html', error_message=error_message)
+        existing_user = User.query.filter_by(Email=email).first()
+        if existing_user:
+            error_message = "Użytkownik o podanym adresie email już istnieje. Może chcesz się <a href='/login'>zalogować</a>?"
+            return render_template('register.html', error_message=error_message)
         # Jeśli użytkownik nie istnieje, dodajemy go do bazy danych
-        new_user = User(Name=username, Password=password)
+        new_user = User(Name=username, Password=password, Email = email)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('login'))

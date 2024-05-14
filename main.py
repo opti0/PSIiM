@@ -8,6 +8,7 @@ app.secret_key = secrets.token_hex(16)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db.init_app(app)
 
+
 # Tworzenie tablic w bazie danych
 with app.app_context():
     db.create_all()
@@ -17,7 +18,7 @@ users = {'user1': 'password1', 'user2': 'password2'}
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', current_user=session.get('current_user'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -39,16 +40,25 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        print(request)
         username = request.form['username']
         password = request.form['password']
         user = User.query.filter_by(Name=username, Password=password).first()
         if user and user.Password == password:
+            print("Zalogowano")
             session['user_id'] = user.UserID
+            session['current_user'] = user.Name
+            #return render_template('index.html', testData=testData)
             return redirect(url_for('index'))
         else:
             error_message = "Nieprawidłowa nazwa użytkownika lub hasło. Spróbuj ponownie!"
             return render_template('login.html', error_message=error_message)
     return render_template('login.html')
+
+@app.route('/logout', methods=['GET'])
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)

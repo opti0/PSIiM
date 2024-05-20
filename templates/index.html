@@ -1,31 +1,8 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strona główna</title>
-    <!-- Link do Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Link do własnych stylów CSS -->
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-    <header class="bg-primary text-white p-4">
-        <div class="container">
-            <h1 class="display-4">{% if current_user %}Żelguj-Znakuj!{% else %}Witaj na naszej stronie!{% endif %}</h1>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light mt-3">
-                <a class="navbar-brand" href="/">Strona główna</a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav ml-auto">
-                        {% if current_user %}
-                            <li class="nav-item"><a class="nav-link" href="/logout">Wyloguj</a></li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
-    
+{% extends "base.html" %}
+
+{% block title %}Strona główna{% endblock %}
+
+{% block content %}
     <main class="container mt-5">
         <!-- Sekcja z kafelkami -->
         <div class="row">
@@ -85,14 +62,5 @@
             </div>
         </div>
     </main>
-    
-    <footer class="bg-light text-center p-4 mt-5">
-        <p><a href="/about">O nas</a> | <a href="/faq">FAQ</a></p>
-    </footer>
-
-    <!-- Linki do Bootstrap JS i jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+   
+    {% endblock %}

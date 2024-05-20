@@ -59,7 +59,24 @@ def login():
 @app.route('/logout', methods=['GET'])
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
+
+@app.route('/achievements')
+def achievements():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    user_id = session['user_id']
+    
+    # Pobieranie osiągnięć użytkownika
+    user_achievements = db.session.query(Achievement).join(ConnectingTableAchievements).filter(
+        ConnectingTableAchievements.UserID == user_id
+    ).all()
+
+    return render_template('achievements.html', achievements=user_achievements)
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

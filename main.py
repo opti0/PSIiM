@@ -8,6 +8,21 @@ app.secret_key = secrets.token_hex(16)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db.init_app(app)
 
+@app.shell_context_processor
+def make_shell_context():
+    return {
+        'db': db,
+        'User': User,
+        'Sign': Sign,
+        'Achievement': Achievement,
+        'Question': Question,
+        'Answer': Answer,
+        'ConnectingTableQuestions': ConnectingTableQuestions,
+        'ConnectingTableSigns': ConnectingTableSigns,
+        'ConnectingTableAchievements': ConnectingTableAchievements
+    }
+
+
 
 # Tworzenie tablic w bazie danych
 with app.app_context():
@@ -59,7 +74,32 @@ def login():
 @app.route('/logout', methods=['GET'])
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
+
+@app.route('/achievements')
+def achievements():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    user_id = session['user_id']
+    
+    # Pobieranie osiągnięć użytkownika
+    user_achievements = db.session.query(Achievement).join(ConnectingTableAchievements).filter(
+        ConnectingTableAchievements.UserID == user_id
+    ).all()
+
+    return render_template('achievements.html', achievements=user_achievements)
+
+
+@app.route('/faq')
+def faq():
+    return render_template('faq.html')
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

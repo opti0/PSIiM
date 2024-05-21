@@ -3,12 +3,64 @@
 {% block title %}Strona główna{% endblock %}
 
 {% block content %}
-<div class="jumbotron">
-    <h1 class="display-4">Żegluj - Znakuj</h1>
-    <p class="lead">Testowy tekst</p>
-    <hr class="my-4">
-    <p>It includes registration and login functionality.</p>
-    <a class="btn btn-primary btn-lg" href="/register" role="button">Rejestracja</a>
-    <a class="btn btn-success btn-lg" href="/login" role="button">Logowanie</a>
-</div>
-{% endblock %}
+    <main class="container mt-5">
+        <!-- Sekcja z kafelkami -->
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Skanowanie Kodów QR</h5>
+                        <p class="card-text">Przejdź aby szukać nowych znaków</p>
+                        <a href="/qr_scanning" class="btn btn-primary">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Znalezione Znaki</h5>
+                        <p class="card-text">Przeglądaj wszystkie znalezione znaki</p>
+                        <a href="/found_signs" class="btn btn-primary">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Quizy</h5>
+                        <p class="card-text">Rozwiąż quizy i sprawdź swoją wiedzę</p>
+                        <a href="/quizzes" class="btn btn-primary">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Osiągnięcia Użytkownika</h5>
+                        <p class="card-text">Sprawdź swoje osiągnięcia</p>
+                        <a href="/achievements" class="btn btn-primary">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Mój profil</h5>
+                        <p class="card-text">Zarządzaj swoim profilem</p>
+                        <a href="/profile" class="btn btn-primary">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Ustawienia</h5>
+                        <p class="card-text">Dostosuj ustawienia konta</p>
+                        <a href="/settings" class="btn btn-primary">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+   
+    {% endblock %}

@@ -8,6 +8,21 @@ app.secret_key = secrets.token_hex(16)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db.init_app(app)
 
+@app.shell_context_processor
+def make_shell_context():
+    return {
+        'db': db,
+        'User': User,
+        'Sign': Sign,
+        'Achievement': Achievement,
+        'Question': Question,
+        'Answer': Answer,
+        'ConnectingTableQuestions': ConnectingTableQuestions,
+        'ConnectingTableSigns': ConnectingTableSigns,
+        'ConnectingTableAchievements': ConnectingTableAchievements
+    }
+
+
 
 # Tworzenie tablic w bazie danych
 with app.app_context():
@@ -76,6 +91,14 @@ def achievements():
     return render_template('achievements.html', achievements=user_achievements)
 
 
+@app.route('/faq')
+def faq():
+    return render_template('faq.html')
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 
 if __name__ == '__main__':

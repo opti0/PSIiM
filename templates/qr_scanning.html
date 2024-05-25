@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Skanowanie kodu QR{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Wprowadź kod QR</h2>
+    <form action="{{ url_for('qr_scanning') }}" method="post">
+        <div class="form-group">
+            <input type="text" name="code" class="form-control" required>
+        </div>
+	<div class="mt-4"></div> 
+        <button type="submit" class="btn btn-primary">Skanuj</button>
+        {% if error_message %}
+        <div class="alert alert-danger mt-3">{{ error_message }}</div>
+        {% endif %}
+        {% if success_message %}
+        <div class="alert alert-success mt-3">{{ success_message }}</div>
+        {% endif %}
+    </form>
+
+    {% if found_sign %}
+    <div class="mt-5">
+        <h3>{{ found_sign.SignName }}</h3>
+        <p><strong>Opis:</strong> {{ found_sign.Description }}</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

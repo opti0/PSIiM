@@ -3,20 +3,20 @@
 {% block title %}Osiągnięcia{% endblock %}
 
 {% block content %}
-    <main class="container mt-5">
-        <h2 class="mb-4">Twoje osiągnięcia</h2>
-        <div class="row">
-            {% for achievement in achievements %}
-                <div class="col-md-4 mb-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ achievement.title }}</h5>
-                            <p class="card-text">{{ achievement.description }}</p>
-                        </div>
-                    </div>
+<main class="container mt-5">
+    <h2 class="mb-4">Twoje osiągnięcia</h2>
+    <div class="row">
+        {% for achievement in achievements %}
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">{{ achievement.AchievementName }}</h5>
+                    <p class="card-text">{{ achievement.Description }}</p>
                 </div>
-            {% endfor %}
+            </div>
         </div>
-    </main>
-  
-    {% endblock %} 
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock %}

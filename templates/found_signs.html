@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Znalezione Znaki{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Znalezione Znaki</h2>
+    <div class="row">
+        {% for sign in found_signs %}
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">{{ sign.SignName }}</h5>
+                    <p class="card-text">{{ sign.Description }}</p>
+                    <!-- Możesz dodać więcej informacji, jeśli jest dostępna -->
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,4 +1,5 @@
 from db import *
+import fillDB
 import secrets
 import os
 from flask_login import LoginManager, login_required
@@ -20,9 +21,11 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'instance', 'database.db')
 db.init_app(app)
 
+
 # Utworzenie wszystkich tabel w bazie danych, jeśli nie istnieją
 with app.app_context():
     db.create_all()
+    fillDB.fill(db) #dodanie znaków, pytań i osiągnięć, jeśli nie istnieją
 
 # Główna strona aplikacji
 @app.route('/')

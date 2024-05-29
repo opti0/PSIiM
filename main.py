@@ -2,8 +2,7 @@ from db import *
 import fillDB
 import secrets
 import os
-from flask_login import LoginManager, login_required
-from flask_sqlalchemy import SQLAlchemy
+#from flask_login import LoginManager, login_required
 from sqlalchemy import func
 import random
 from flask import Flask, render_template, request, redirect, url_for, session, flash

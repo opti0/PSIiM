@@ -6,11 +6,15 @@ import os
 from sqlalchemy import func
 import random
 from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flasgger import Swagger #swagger
 
 
 
 # Inicjalizacja aplikacji Flask
 app = Flask(__name__)
+
+app.config['SWAGGER'] = {'title': 'API', 'uiversion': 3}
+swagger = Swagger(app) #swagger
 
 # Ustawienie sekretnego klucza dla sesji, generowane losowo za każdym razem, gdy aplikacja się uruchamia
 app.secret_key = secrets.token_hex(16)
@@ -35,6 +39,9 @@ def index():
 # Strona i logika rejestracji użytkownika
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    """
+    file: static/docs/register.yml
+    """
     if request.method == 'POST':
         # Pobieranie danych z formularza
         username = request.form['username']
@@ -61,6 +68,9 @@ def register():
 # Strona i logika logowania użytkownika
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """
+    file: static/docs/login.yml
+    """
     if request.method == 'POST':
         # Pobieranie danych z formularza
         username = request.form['username']
@@ -83,12 +93,19 @@ def login():
 # Trasa odpowiedzialna za wylogowanie użytkownika
 @app.route('/logout', methods=['GET'])
 def logout():
+    """
+    file: static/docs/logout.yml
+    """
     session.clear()  # Usunięcie wszystkich danych z sesji
     return redirect(url_for('login'))  # Przekierowanie do strony logowania
 
 # Trasa do wyświetlania osiągnięć użytkownika
 @app.route('/achievements')
 def achievements():
+    """
+    file: static/docs/achievements.yml
+    """
+
     current_user = session.get('current_user')  # Pobranie aktualnie zalogowanego użytkownika z sesji
     if 'user_id' not in session:
         return redirect(url_for('login'))  # Przekierowanie do logowania, jeśli użytkownik nie jest zalogowany
@@ -106,6 +123,9 @@ def achievements():
 # Trasa odpowiedzialna za skanowanie kodów QR
 @app.route('/qr_scanning', methods=['GET', 'POST'])
 def qr_scanning():
+    """
+    file: static/docs/qr_scanning.yml
+    """
     error_message = None  # Zmienna na wiadomości o błędach
     success_message = None  # Zmienna na wiadomości o sukcesie
     found_sign = None  # Znaleziony znak
@@ -155,6 +175,9 @@ def check_and_award_achievements(user_id):
 # Trasa do wyświetlania znalezionych znaków przez użytkownika
 @app.route('/found_signs')
 def found_signs():
+    """
+    file: static/docs/found_signs.yml
+    """
     current_user = session.get('current_user')  # Pobranie bieżącego użytkownika z sesji
     if 'user_id' not in session:
         return redirect(url_for('login'))  # Przekierowanie do logowania jeśli użytkownik nie jest zalogowany
@@ -172,6 +195,9 @@ def found_signs():
 # Trasa do zarządzania ustawieniami użytkownika
 @app.route('/settings', methods=['GET', 'POST'])
 def settings():
+    """
+    file: static/docs/settings.yml
+    """
     current_user = session.get('current_user')
     if 'user_id' not in session:
         return redirect(url_for('login'))
@@ -209,6 +235,9 @@ def settings():
 # Trasa do profilu użytkownika
 @app.route('/profile')
 def profile():
+    """
+    file: static/docs/profile.yml
+    """
     current_user = session.get('current_user')
     if 'user_id' not in session:
         return redirect(url_for('login'))  # Przekierowanie do logowania jeśli użytkownik nie jest zalogowany
@@ -228,6 +257,9 @@ def profile():
 # Definiowanie trasy do obsługi quizu, obsługiwane są metody GET i POST
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
+    """
+    file: static/docs/quiz.yml
+    """
     current_user = session.get('current_user')  # Pobranie aktualnego użytkownika z sesji
     if 'user_id' not in session:
         return redirect(url_for('login'))  # Przekierowanie do logowania, jeśli użytkownik nie jest zalogowany
@@ -303,6 +335,9 @@ def quiz():
 # Trasa do strony z gratulacjami po zakończeniu quizu
 @app.route('/congratulations')
 def congratulations():
+    """
+    file: static/docs/congratulations.yml
+    """
     current_user = session.get('current_user')
     if 'user_id' not in session:
         return redirect(url_for('login'))  # Przekierowanie do logowania
@@ -313,11 +348,17 @@ def congratulations():
 # Trasa do strony FAQ
 @app.route('/faq')
 def faq():
+    """
+    file: static/docs/faq.yml
+    """
     return render_template('faq.html')  # Wyświetlenie strony FAQ
 
 # Trasa do strony O nas
 @app.route('/about')
 def about():
+    """
+    file: static/docs/about.yml
+    """
     return render_template('about.html')  # Wyświetlenie strony O nas
 
 # Uruchomienie aplikacji

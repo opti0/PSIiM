@@ -1,0 +1,15 @@
+FAQ
+---
+tags:
+  - Info
+summary: strona z informacjami o autorach
+description:
+produces:
+  - application/json
+responses:
+  "200":
+    description: Pomyślna odpowiedź
+  "400":
+    description: Błąd w zapytaniu
+  "500":
+    description: Błąd serwera

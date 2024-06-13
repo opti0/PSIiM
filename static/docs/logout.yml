@@ -1,0 +1,15 @@
+Wylogowanie
+---
+tags:
+  - Użytkownik
+summary: Wylogowanie użytkownika
+description:
+produces:
+  - application/json
+responses:
+  "200":
+    description: Pomyślna odpowiedź
+  "400":
+    description: Błąd w zapytaniu
+  "500":
+    description: Błąd serwera

@@ -1,0 +1,15 @@
+Profil
+---
+tags:
+  - Użytkownik
+summary: Profil użytkownika
+description: Wyświetla informacje o profilu użytkownika.
+produces:
+  - application/json
+responses:
+  "200":
+    description: Pomyślna odpowiedź
+  "400":
+    description: Błąd w zapytaniu
+  "500":
+    description: Błąd serwera

@@ -1,0 +1,15 @@
+Osiągnięcia
+---
+tags:
+  - Osiągnięcia
+summary: Osiągnięcia użytkownika
+description: Wyświetla osiągnięcia użytkownika.
+produces:
+  - application/json
+responses:
+  "200":
+    description: Pomyślna odpowiedź
+  "400":
+    description: Błąd w zapytaniu
+  "500":
+    description: Błąd serwera

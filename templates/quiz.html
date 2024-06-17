@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Wylosowany Quiz</h2>
+    <form action="{{ url_for('quiz') }}" method="post">
+        {% for question in questions %}
+        <div class="question mb-4">
+            <p>{{ question.QuestionText }}</p>
+            {% for answer in question.answers %}
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="question{{ question.QuestionID }}" id="answer{{ answer.AnswerID }}" value="{{ answer.AnswerID }}" 
+                {% if results is defined and results[question.QuestionID].selected == answer.AnswerID %}checked{% endif %}>
+                <label class="form-check-label" for="answer{{ answer.AnswerID }}">{{ answer.AnswerText }}</label>
+            </div>
+            {% endfor %}
+            {% if results is defined %}
+            <p>
+                {% if results[question.QuestionID].correct %}
+                <span style="color: green;">Poprawna odpowiedź</span>
+                {% else %}
+                <span style="color: red;">Niepoprawna odpowiedź</span>
+                {% endif %}
+            </p>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Sprawdź odpowiedzi</button>
+        </div>
+    </form>
+</div>
+
+<div class="mt-4"></div> 
+
+{% endblock %}

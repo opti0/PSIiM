@@ -1,0 +1,24 @@
+Quiz
+---
+tags:
+  - Quiz
+summary: Quiz o znakach
+description: Quiz o znakach.
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  - in: formData
+    name: user_answers
+    description: pobranie odpowiedzi użytkownika z formularza
+    required: true
+    schema:
+      type: string
+responses:
+  "200":
+    description: Pomyślna odpowiedź
+  "400":
+    description: Błąd w zapytaniu
+  "500":
+    description: Błąd serwera

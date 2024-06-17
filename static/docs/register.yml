@@ -1,0 +1,36 @@
+Rejstracja
+---
+tags:
+  - Użytkownik
+summary: Rejestracja użytkownika
+description: Tworzy konto użytkownika.
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  - in: formData
+    name: username
+    description: nazwa tworzonego użytkownika
+    required: true
+    schema:
+      type: string
+  - in: formData
+    name: password
+    description: hasło tworzonego użytkownika
+    required: true
+    schema:
+      type: string
+  - in: formData
+    name: email
+    description: adres e-mail tworzonego użytkownika
+    required: true
+    schema:
+      type: string
+responses:
+  "200":
+    description: Pomyślna odpowiedź
+  "400":
+    description: Błąd w zapytaniu
+  "500":
+    description: Błąd serwera

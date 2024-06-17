@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Mój Profil{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Mój Profil</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>Nazwa Użytkownika:</strong> {{ user.Name }}</p>
+            <p><strong>Liczba Znalezionych Przez Ciebie Znaków:</strong> {{ found_signs_count }}</p>
+            <p><strong>Liczba Twoich Osiągnięć:</strong> {{ achievements_count }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

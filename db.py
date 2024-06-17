@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 
+
 # Inicjalizacja obiektu SQLAlchemy
 db = SQLAlchemy()
 
@@ -16,7 +17,7 @@ class Sign(db.Model):
     SignName = db.Column(db.String(255))
     Description = db.Column(db.String(2000))
     QRCode = db.Column(db.String(255))
-    Picture = db.Column(db.LargeBinary)
+ #   Picture = db.Column(db.LargeBinary)
 
 # Model tabeli Achievements
 class Achievement(db.Model):
@@ -37,6 +38,17 @@ class Answer(db.Model):
     QuestionID = db.Column(db.Integer, db.ForeignKey('question.QuestionID'))
     AnswerText = db.Column(db.String(255))
     IsCorrect = db.Column(db.Boolean)
+
+    # Model tabeli UserCorrectAnswers
+class UserCorrectAnswers(db.Model):
+    ID = db.Column(db.Integer, primary_key=True)
+    UserID = db.Column(db.Integer, db.ForeignKey('user.UserID'))
+    QuestionID = db.Column(db.Integer, db.ForeignKey('question.QuestionID'))
+
+  
+    user = db.relationship('User', backref=db.backref('correct_answers', lazy=True))
+    question = db.relationship('Question', backref=db.backref('correct_answers', lazy=True))
+
 
 # Model tabeli ConnectingTableQuestions
 class ConnectingTableQuestions(db.Model):
